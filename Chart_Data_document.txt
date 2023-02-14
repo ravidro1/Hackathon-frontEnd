@@ -1,0 +1,16 @@
+DoughnutChart: data: {
+  datasets: [
+    {
+      label: string,
+      data: [],
+      backgroundColor: [],
+      borderColor: [],
+      borderWidth: number,
+      cutout: "%",
+    },
+  ];
+}
+middelText;
+middelTextfontSize;
+width;
+height;
