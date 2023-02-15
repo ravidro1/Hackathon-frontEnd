@@ -1,18 +1,13 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
-import {Context} from "../App";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Context } from "../App";
 import DefineDataTypes from "./DefineDataTypes";
 
 import axios from "axios";
 
 function AddTabel(props) {
-  const {
-    dataTypes,
-    typeOfFieldsObj,
-    setTypeOfFieldsObj,
-    FileTable,
-    setFileTable,
-    user,
-  } = useContext(Context);
+  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user, setExcelDataType, setCurrentExcel } = useContext(Context);
+
+
 
   const fileInputRef = useRef();
 
@@ -68,20 +63,14 @@ function AddTabel(props) {
   function setSchemaMongoose() {
     console.log(user);
     console.log(typeOfFieldsObj);
-    axios
-      .post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, {
-        dataType: typeOfFieldsObj,
-        tableData: Tabel,
-        name: excelName,
-        user_id: user._id,
+    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: user._id })
+      .then(res => {
+        console.log(res.data);
+        setFileTable(res.data.execlTable)
+        setExcelDataType(res.data.execlDataType)
+        setCurrentExcel(res.data.excel)
       })
-      .then((res) => {
-        console.log(res.data.excelTable);
-        setFileTable(res.data.excelTable);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(err => { console.log(err); })
   }
 
   return (

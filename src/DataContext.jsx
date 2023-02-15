@@ -9,6 +9,8 @@ function DataContext(props) {
 
   const [typeOfFieldsObj, setTypeOfFieldsObj] = useState();
   const [user, setUser] = useState("")
+  const [excelDataType, setExcelDataType] = useState("")
+  const [currentExcel, setCurrentExcel] = useState([])
 
 
   useEffect(() => {
@@ -32,7 +34,9 @@ function DataContext(props) {
     logout,
     user, setUser,
     setFileTable,
-    FileTable
+    FileTable,
+    excelDataType, setExcelDataType,
+    currentExcel, setCurrentExcel
   };
 }
 
