@@ -1,6 +1,6 @@
 import axios from "axios";
-import react, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import react, {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 import "../Style/signUpPage.css";
 
@@ -19,7 +19,7 @@ const SignUp = () => {
         username,
         password,
         phoneNumber: phone,
-        email
+        email,
       })
       .then((res) => {
         navigate("/");
@@ -57,8 +57,16 @@ const SignUp = () => {
             }}
             type={"text"}
           />
-          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="email" />
-          <input type="number" onChange={(e) => setPhone(e.target.value)} placeholder="number" />
+          <input
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="email"
+          />
+          <input
+            type="number"
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="number"
+          />
         </div>
 
         <div className="errorLine-signUpPage">

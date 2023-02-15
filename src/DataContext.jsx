@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function DataContext(props) {
   const navigate = useNavigate();
@@ -16,23 +16,26 @@ function DataContext(props) {
   useEffect(() => {
     console.log(JSON.parse(sessionStorage.getItem("currentUser")));
     if (JSON.parse(sessionStorage.getItem("currentUser")))
-      setUser(JSON.parse(sessionStorage.getItem("currentUser")))
+      setUser(JSON.parse(sessionStorage.getItem("currentUser")));
   }, []);
 
   const logout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("id");
-    setUser("")
+    setUser("");
     navigate("/");
   };
-  const [FileTable, setFileTable] = useState([])
+  const [FileTable, setFileTable] = useState([]);
+
+  const [currentTable, setCurrentTable] = useState();
 
   return {
     dataTypes,
     typeOfFieldsObj,
     setTypeOfFieldsObj,
     logout,
-    user, setUser,
+    user,
+    setUser,
     setFileTable,
     FileTable,
     excelDataType, setExcelDataType,
