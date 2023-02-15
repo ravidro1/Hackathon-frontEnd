@@ -47,11 +47,14 @@ function AddTabel(props) {
   }, [typeOfFieldsObj]);
 
   function setSchemaMongoose() {
+    console.log(user);
     console.log(typeOfFieldsObj);
-    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, userId: user._id })
-      .then(res => { setFileTable(res.data.table) })
+    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: user._id })
+      .then(res => { setFileTable(res.data.excelTable) })
       .catch(err => { console.log(err); })
   }
+  console.log(user);
+
   return (
     <div>
       <input

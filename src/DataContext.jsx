@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function DataContext(props) {
@@ -9,6 +9,13 @@ function DataContext(props) {
 
   const [typeOfFieldsObj, setTypeOfFieldsObj] = useState();
   const [user, setUser] = useState("")
+
+
+  useEffect(() => {
+    console.log(JSON.parse(sessionStorage.getItem("currentUser")));
+    if (JSON.parse(sessionStorage.getItem("currentUser")))
+      setUser(JSON.parse(sessionStorage.getItem("currentUser")))
+  }, []);
 
   const logout = () => {
     sessionStorage.removeItem("token");

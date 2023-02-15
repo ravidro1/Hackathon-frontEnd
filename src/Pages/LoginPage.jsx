@@ -11,6 +11,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+
   const [errorLine, setErrorLine] = useState();
 
   const login = () => {
@@ -22,11 +23,14 @@ const Login = () => {
         .post(`${process.env.REACT_APP_EXPRESS_PORT}/Login`, {
           username,
           password,
+
         })
         .then((res) => {
           sessionStorage.setItem("token", JSON.stringify(res.data.token));
           sessionStorage.setItem("id", JSON.stringify(res.data.userID));
+          sessionStorage.setItem("currentUser", JSON.stringify(res.data.userData));
           setUser(res.data.userData)
+          // console.log(res.data.userData);
           navigate("/DashBoard");
         })
         .catch((err) => {
@@ -38,6 +42,7 @@ const Login = () => {
 
   return (
     <div className="main-loginPage">
+      {console.log(user)}
       <div className="form-loginPage">
         <div className="loginWord-LoginPage"> Login </div>
 
@@ -62,6 +67,8 @@ const Login = () => {
             }}
             type={"password"}
           />
+
+
         </div>
 
         <div className="errorLine-LoginPage">

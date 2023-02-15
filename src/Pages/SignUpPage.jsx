@@ -1,6 +1,6 @@
 import axios from "axios";
-import react, {useState, useEffect} from "react";
-import {useNavigate} from "react-router-dom";
+import react, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "../Style/signUpPage.css";
 
@@ -9,6 +9,8 @@ const SignUp = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
   const [errorLine, setErrorLine] = useState();
 
   const signUp = () => {
@@ -16,6 +18,8 @@ const SignUp = () => {
       .post(`${process.env.REACT_APP_EXPRESS_PORT}/SignUp`, {
         username,
         password,
+        phoneNumber: phone,
+        email
       })
       .then((res) => {
         navigate("/");
@@ -53,6 +57,8 @@ const SignUp = () => {
             }}
             type={"text"}
           />
+          <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="email" />
+          <input type="number" onChange={(e) => setPhone(e.target.value)} placeholder="number" />
         </div>
 
         <div className="errorLine-signUpPage">
