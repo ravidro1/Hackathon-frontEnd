@@ -9,6 +9,7 @@ function DataContext(props) {
 
   const [typeOfFieldsObj, setTypeOfFieldsObj] = useState();
 
+
   const logout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("id");
@@ -20,6 +21,7 @@ function DataContext(props) {
     typeOfFieldsObj,
     setTypeOfFieldsObj,
     logout,
+
   };
 }
 
