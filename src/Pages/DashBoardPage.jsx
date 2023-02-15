@@ -73,14 +73,12 @@ function DashBoardPage(props) {
     },
   ]);
 
-
-
   return (
-    <div className="main-LoginPage">
+    <div className="main-DashBoard">
       <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button>
       <NavBar />
 
-      <DoughnutChart
+      {/* <DoughnutChart
         label={"label"}
         arrayOfObject={ddata}
         middelText={"Hey"}
@@ -88,7 +86,7 @@ function DashBoardPage(props) {
         width={"400px"}
         height={"400px"}
         backgroundColor={"rgba(244,65,12, 0.5)"}
-      />
+      /> */}
       <BarChart
         label={"label"}
         arrayOfObject={ddata}
@@ -98,6 +96,20 @@ function DashBoardPage(props) {
         height={"400px"}
         backgroundColor={"rgba(244,65,12, 0.5)"}
       />
+
+      {/* <div>
+        X -Axis
+        <select>
+          <option></option>
+        </select>
+      </div>
+
+      <div>
+        filters
+        <select>
+          <option></option>
+        </select>
+      </div> */}
     </div>
   );
 }
