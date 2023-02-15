@@ -37,7 +37,7 @@ function BarChart({
       tempValue.datasets[0].data.push(item.value);
     });
 
-    console.log(tempValue);
+    // console.log(tempValue);
 
     setData(tempValue);
   }, [arrayOfObject]);
