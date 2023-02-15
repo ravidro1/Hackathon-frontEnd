@@ -1,11 +1,39 @@
-import React, { useState } from "react";
-import AddTable from "../Components/DefineDataTypes";
-import BarChart from "../Components/Charts/BarChart";
-import DoughnutChart from "../Components/Charts/DoughnutChart";
+import React, { useContext, useState } from "react";
+import AddTable from "../components/DefineDataTypes";
+import BarChart from "../components/Charts/BarChart";
+import DoughnutChart from "../components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
-import NavBar from "../Components/NavBar";
+import NavBar from "../components/NavBar";
+import { Context } from "../App";
 
 function DashBoardPage(props) {
+
+  const { FileTable } = useContext(Context)
+  function setArr(obj) {
+    console.log(Object.entries(obj))
+    let arr = [];
+    Object.entries(obj).forEach(e => {
+      arr.push({ name: e[0], value: e[1] })
+    })
+    console.log(arr);
+    return arr
+  }
+  function calculateSum(array, property) {
+    let arr = {};
+    console.log(FileTable);
+    array.forEach(ele => {
+      arr[ele[property]] = (arr[ele[property]] || 0) + 1
+      // arr["value"] = (arr["value"] || 0) + 1
+    });
+    console.log(arr);
+    return arr
+  }
+  function theCountToArr(array, property) {
+    // const objSum = calculateSum(array, property)
+    const count = setArr(calculateSum(array, property))
+    console.log(count);
+  }
+
   const [ddata] = useState([
     {
       name: "obj1",
@@ -49,6 +77,7 @@ function DashBoardPage(props) {
 
   return (
     <div className="main-LoginPage">
+      <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button>
       <NavBar />
 
       <DoughnutChart
