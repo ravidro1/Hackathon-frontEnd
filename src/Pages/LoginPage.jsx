@@ -1,12 +1,13 @@
-import {useEffect, useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios"
 
 import "../Style/loginPage.css";
+import { Context } from "../App";
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const { user, setUser } = useContext(Context)
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,6 +26,7 @@ const Login = () => {
         .then((res) => {
           sessionStorage.setItem("token", JSON.stringify(res.data.token));
           sessionStorage.setItem("id", JSON.stringify(res.data.userID));
+          setUser(res.data.userData)
           navigate("/DashBoard");
         })
         .catch((err) => {

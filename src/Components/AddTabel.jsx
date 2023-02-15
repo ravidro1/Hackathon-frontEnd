@@ -3,43 +3,31 @@ import { Context } from "../App";
 import DefineDataTypes from "./DefineDataTypes";
 
 import axios from "axios";
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Context } from '../App';
-import DefineDataTypes from './DefineDataTypes';
 
 function AddTabel(props) {
-  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable } = useContext(Context);
+  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user } = useContext(Context);
 
-  const [tabelArray, setArray] = useState([
-    [
-      "Full Name",
-      "Job Title",
-      "Department",
-      "Business Unit",
-      "Gender",
-      "Ethnicity",
-      "Age",
-    ],
-  ]);
+
 
   const fileInputRef = useRef();
 
   const [tempFile, setTempFile] = useState();
   const [Tabel, setTabel] = useState();
-
+  const [excelName, setExcelName] = useState("")
 
 
 
   const uploadFileToDb = () => {
-    setTempFile("");
     const fileData = new FormData()
     fileData.append("uploadFile", tempFile)
-
+    console.log(tempFile);
+    console.log(fileData);
     axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/HandleFileUpload`, fileData)
       .then(res => {
         setTabel(res.data.data)
       })
 
+    setTempFile("");
     fileInputRef.current.value = [];
   };
 
@@ -60,9 +48,9 @@ function AddTabel(props) {
 
   function setSchemaMongoose() {
     console.log(typeOfFieldsObj);
-    axios.post("", { dataType: typeOfFieldsObj })
+    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, userId: user._id })
       .then(res => { setFileTable(res.data.table) })
-      .catch(err => { })
+      .catch(err => { console.log(err); })
   }
   return (
     <div>
@@ -74,9 +62,13 @@ function AddTabel(props) {
         type={"file"}
       />
       <button onClick={uploadFileToDb}> Add Tabel </button>
-      {console.log(tabelArray)};
       {Tabel && <DefineDataTypes tabelArray={Tabel} />}
-      {isAllTheFieldsWithDataType && <button onClick={setSchemaMongoose}> submit </button>}
+      {isAllTheFieldsWithDataType &&
+        <>
+          <h3>Enter Excel Name</h3>
+          <input type="text" onChange={(e) => setExcelName(e.target.value)} />
+        </>}
+      {excelName.length > 3 && <button onClick={setSchemaMongoose}> submit </button>}
     </div>
   );
 }
