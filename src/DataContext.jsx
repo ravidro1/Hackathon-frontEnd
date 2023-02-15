@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function DataContext(props) {
   const navigate = useNavigate();
@@ -15,6 +15,7 @@ function DataContext(props) {
     sessionStorage.removeItem("id");
     navigate("/");
   };
+  const [FileTable, setFileTable] = useState([])
 
   return {
     dataTypes,
@@ -22,6 +23,8 @@ function DataContext(props) {
     setTypeOfFieldsObj,
     logout,
 
+    setFileTable,
+    FileTable
   };
 }
 

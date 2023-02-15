@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import AddTable from "../Components/DefineDataTypes";
 import BarChart from "../Components/Charts/BarChart";
 import DoughnutChart from "../Components/Charts/DoughnutChart";
