@@ -3,6 +3,7 @@ import AddTable from "../Components/DefineDataTypes";
 import BarChart from "../Components/Charts/BarChart";
 import DoughnutChart from "../Components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
+import NavBar from "../Components/NavBar";
 
 function DashBoardPage(props) {
   const [ddata] = useState([
@@ -46,6 +47,8 @@ function DashBoardPage(props) {
 
   return (
     <div className="main-LoginPage">
+      <NavBar />
+
       <DoughnutChart
         label={"label"}
         arrayOfObject={ddata}
@@ -64,8 +67,6 @@ function DashBoardPage(props) {
         height={"400px"}
         backgroundColor={"rgba(244,65,12, 0.5)"}
       />
-
-      <AddTable />
     </div>
   );
 }
