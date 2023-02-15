@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../App";
 
-import AddTabel from "../Components/AddTabel";
-import ExcelTable from "../Components/Charts/ExcelTable";
+import AddTabel from "../components/AddTabel";
+import ExcelTable from "../components/Charts/ExcelTable";
 import AddToTable from "./AddToTable";
 
 function ShowAndEditTabel(props) {

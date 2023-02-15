@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import AddTable from "../Components/DefineDataTypes";
-import BarChart from "../Components/Charts/BarChart";
-import DoughnutChart from "../Components/Charts/DoughnutChart";
+import AddTable from "../components/DefineDataTypes";
+import BarChart from "../components/Charts/BarChart";
+import DoughnutChart from "../components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
-import NavBar from "../Components/NavBar";
+import NavBar from "../components/NavBar";
 import { Context } from "../App";
 
 function DashBoardPage(props) {

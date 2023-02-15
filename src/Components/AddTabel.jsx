@@ -66,8 +66,8 @@ function AddTabel(props) {
     axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: user._id })
       .then(res => {
         console.log(res.data);
-        setFileTable(res.data.execlTable)
-        setExcelDataType(res.data.execlDataType)
+        setFileTable(res.data.excelTable)
+        setExcelDataType(res.data.excelDataType)
         setCurrentExcel(res.data.excel)
       })
       .catch(err => { console.log(err); })

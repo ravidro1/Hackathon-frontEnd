@@ -31,8 +31,8 @@ function AddToTable() {
         console.log(currentExcel._id);
         axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/AddRowToTable`, { newRow: newTableRow, id: currentExcel._id })
             .then(res => {
-                console.log(res.data.execlTable);
-                setFileTable(res.data.execlTable.execl_structure)
+                console.log(res.data);
+                setFileTable(res.data.excelTable.excel_structure)
             })
             .catch(err => { console.log(err); })
     }
