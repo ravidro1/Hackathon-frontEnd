@@ -23,17 +23,19 @@ function AddTabel(props) {
     const [Tabel, setTabel] = useState();
   
     const addTabel = () => {
-      setTabel(tempFile);
       setTempFile("");
   
-      // axios
-      //   .post("")
-      //   .then((res) => {})
-      //   .catch((err) => {
-      //     console.log(err);
-      //   });
+
+    //   axios
+    //     .post("")
+    //     .then((res) => {
+    //         setTabel(res.data.tabel);
+    //         fileInputRef.current.value = [];
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   
-      fileInputRef.current.value = [];
     };
   
     const [isAllTheFieldsWithDataType, setIsAllTheFieldsWithDataType] =
@@ -51,6 +53,9 @@ function AddTabel(props) {
       }
     }, [typeOfFieldsObj]);
   
+
+    
+
     return (
       <div>
         <input

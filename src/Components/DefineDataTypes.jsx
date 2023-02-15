@@ -10,7 +10,7 @@ function DefineDataTypes({tabelArray}) {
   useEffect(() => {
     setTypeOfFieldsObj(() => {
       const tempObj = {};
-      tabelArray[0].forEach((key) => {
+      if(tabelArray) tabelArray[0]?.forEach((key) => {
         tempObj[key] = "";
       });
       return tempObj;
@@ -28,7 +28,7 @@ function DefineDataTypes({tabelArray}) {
   return (
     <div>
       <div>
-        {tabelArray[0].map((item, index) => {
+        {tabelArray && tabelArray[0]?.map((item, index) => {
           return (
             <div key={index}>
               <input

@@ -5,7 +5,7 @@ import AddTabel from "../Components/AddTabel";
 function ShowAndEditTabel(props) {
   return (
     <div>
-      <AddTabel />
+      { <AddTabel />}
     </div>
   );
 }

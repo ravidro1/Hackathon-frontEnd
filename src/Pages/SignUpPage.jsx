@@ -1,21 +1,32 @@
+import axios from "axios";
 import react, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 
 import "../Style/signUpPage.css";
 
-
 const SignUp = () => {
-
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorLine, setErrorLine] = useState();
 
-
-
   const signUp = () => {
-   
+    axios
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/SignUp`, {
+        username,
+        password,
+      })
+      .then((res) => {
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+        setErrorLine("Both Input Required");
+      });
+
+    setUsername("");
+    setPassword("");
   };
 
   return (

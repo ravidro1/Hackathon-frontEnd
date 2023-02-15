@@ -1,10 +1,10 @@
 import {useEffect, useContext, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios"
 
 import "../Style/loginPage.css";
 
 const Login = () => {
-
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -12,20 +12,30 @@ const Login = () => {
 
   const [errorLine, setErrorLine] = useState();
 
-
   const login = () => {
-    // if (username.length == 0 || password.length == 0) {
-    //   setErrorLine("Both Fields Should Be Filled");
-    // } else {
+    if (username.length == 0 || password.length == 0) {
+      setErrorLine("Both Fields Should Be Filled");
+    } else {
 
-    // }
-
-    navigate("/DashBoard")
+      axios
+        .post(`${process.env.REACT_APP_EXPRESS_PORT}/Login`, {
+          username,
+          password,
+        })
+        .then((res) => {
+          sessionStorage.setItem("token", JSON.stringify(res.data.token));
+          sessionStorage.setItem("id", JSON.stringify(res.data.userID));
+          navigate("/DashBoard");
+        })
+        .catch((err) => {
+          console.log(err);
+          setErrorLine("Username Or Password incorrect");
+        });
+    }
   };
 
   return (
     <div className="main-loginPage">
-
       <div className="form-loginPage">
         <div className="loginWord-LoginPage"> Login </div>
 
