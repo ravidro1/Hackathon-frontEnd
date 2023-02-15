@@ -1,16 +1,17 @@
-import React, {useState} from "react";
-import {useEffect} from "react";
-import {useContext} from "react";
-import {Context} from "../App";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { Context } from "../App";
 import DataContext from "../DataContext";
+import AddTabel from "./AddTabel";
 
-function DefineDataTypes({tabelArray}) {
-  const {dataTypes, typeOfFieldsObj, setTypeOfFieldsObj} = useContext(Context);
+function DefineDataTypes({ tabelArray }) {
+  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj } = useContext(Context);
 
   useEffect(() => {
     setTypeOfFieldsObj(() => {
       const tempObj = {};
-      if(tabelArray) tabelArray[0]?.forEach((key) => {
+      tabelArray && tabelArray[0]?.forEach((key) => {
         tempObj[key] = "";
       });
       return tempObj;
@@ -18,10 +19,20 @@ function DefineDataTypes({tabelArray}) {
   }, []);
 
 
-
+  let t = [
+    [
+      "Full Name",
+      "Job Title",
+      "Department",
+      "Business Unit",
+      "Gender",
+      "Ethnicity",
+      "Age",
+    ],
+  ]
 
   const changeTypeOfFieldsObj = (dataKey, newType) => {
-    const newTypeOfFieldsObj = {...typeOfFieldsObj, [dataKey]: newType};
+    const newTypeOfFieldsObj = { ...typeOfFieldsObj, [dataKey]: newType };
     setTypeOfFieldsObj(newTypeOfFieldsObj);
   };
 
