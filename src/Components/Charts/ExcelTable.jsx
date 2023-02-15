@@ -6,22 +6,27 @@ function ExcelTable() {
 
     return (
         <div>
+            {console.log(FileTable)}
+            <h1>HEllo</h1>
             <table>
                 <thead>
                     <tr>
-                        {FileTable[0] && Object.keys(FileTable[0])?.forEach((columnName) => {
-                            <th>{columnName}</th>
+                        {FileTable[0] && Object.keys(FileTable[0]).map((columnName) => {
+                            return <th>{columnName}</th>
+                            console.log(Object.keys(FileTable[0]))
+
                         })}
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        FileTable.map((fullObj) => {
-                            <tr>
-                                {Object.values(fullObj)?.forEach((columnData) => {
-                                    <td>{columnData}</td>
+                        FileTable[0] && FileTable.map((fullObj) => {
+                            return (<tr>
+                                {Object.values(fullObj)?.map((columnData) => {
+                                    return <td>{columnData}</td>
+                                    console.log(columnData);
                                 })}
-                            </tr>
+                            </tr>)
                         })
                     }
                 </tbody>
