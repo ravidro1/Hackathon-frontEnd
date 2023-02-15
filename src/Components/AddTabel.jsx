@@ -5,7 +5,7 @@ import DefineDataTypes from "./DefineDataTypes";
 import axios from "axios";
 
 function AddTabel(props) {
-  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user } = useContext(Context);
+  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user, setExcelDataType, setCurrentExcel } = useContext(Context);
 
 
 
@@ -50,7 +50,12 @@ function AddTabel(props) {
     console.log(user);
     console.log(typeOfFieldsObj);
     axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: user._id })
-      .then(res => { setFileTable(res.data.excelTable) })
+      .then(res => {
+        console.log(res.data);
+        setFileTable(res.data.execlTable)
+        setExcelDataType(res.data.execlDataType)
+        setCurrentExcel(res.data.excel)
+      })
       .catch(err => { console.log(err); })
   }
   console.log(user);

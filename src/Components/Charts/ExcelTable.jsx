@@ -11,20 +11,20 @@ function ExcelTable() {
             <table>
                 <thead>
                     <tr>
-                        {FileTable[0] && Object.keys(FileTable[0]).map((columnName) => {
-                            return <th>{columnName}</th>
-                            console.log(Object.keys(FileTable[0]))
+                        {FileTable[0] && Object.keys(FileTable[0])?.map((columnName, index) => {
+                            return <th key={index}>{columnName}</th>
+                            // console.log(Object.keys(FileTable[0]))
 
                         })}
                     </tr>
                 </thead>
                 <tbody>
                     {
-                        FileTable[0] && FileTable.map((fullObj) => {
-                            return (<tr>
-                                {Object.values(fullObj)?.map((columnData) => {
-                                    return <td>{columnData}</td>
-                                    console.log(columnData);
+                        FileTable && FileTable?.map((fullObj, index) => {
+                            return (<tr key={index}>
+                                {Object.values(fullObj)?.map((columnData, i) => {
+                                    return <td key={i} >{columnData}</td>
+                                    // console.log(columnData);
                                 })}
                             </tr>)
                         })
