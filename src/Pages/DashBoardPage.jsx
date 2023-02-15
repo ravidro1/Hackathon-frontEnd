@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import AddTable from "../Components/AddTable";
+import AddTable from "../Components/DefineDataTypes";
 import BarChart from "../Components/Charts/BarChart";
 import DoughnutChart from "../Components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";

@@ -4,7 +4,7 @@ import {useContext} from "react";
 import {Context} from "../App";
 import DataContext from "../DataContext";
 
-function AddTable(props) {
+function DefineDataTypes({tabelArray}) {
   const {dataTypes, typeOfFieldsObj, setTypeOfFieldsObj} = useContext(Context);
 
   useEffect(() => {
@@ -17,37 +17,16 @@ function AddTable(props) {
     });
   }, []);
 
-  const [tabelArray, setArray] = useState([
-    [
-      "Full Name",
-      "Job Title",
-      "Department",
-      "Business Unit",
-      "Gender",
-      "Ethnicity",
-      "Age",
-    ],
-  ]);
 
-  const [isAllTheFieldsWithDataType, setIsAllTheFieldsWithDataType] =
-    useState(false);
+
 
   const changeTypeOfFieldsObj = (dataKey, newType) => {
     const newTypeOfFieldsObj = {...typeOfFieldsObj, [dataKey]: newType};
     setTypeOfFieldsObj(newTypeOfFieldsObj);
-
-    let isFill = true;
-
-    Object.keys(newTypeOfFieldsObj).forEach((key) => {
-      if (newTypeOfFieldsObj[key] == "") isFill = false;
-    });
-
-    setIsAllTheFieldsWithDataType(isFill);
   };
 
   return (
     <div>
-      add tabel
       <div>
         {tabelArray[0].map((item, index) => {
           return (
@@ -55,7 +34,6 @@ function AddTable(props) {
               <input
                 disabled
                 defaultValue={item.toString().trim()}
-                // placeholder={item.toString().trim()}
               />
               <select
                 onChange={(e) => changeTypeOfFieldsObj(item, e.target.value)}
@@ -76,9 +54,8 @@ function AddTable(props) {
           );
         })}
       </div>
-      {isAllTheFieldsWithDataType && <button> submit </button>}
     </div>
   );
 }
 
-export default AddTable;
+export default DefineDataTypes;

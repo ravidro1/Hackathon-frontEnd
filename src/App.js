@@ -6,6 +6,7 @@ import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
 import DataContext from "./DataContext";
 import ErrorPage from "./Pages/ErrorPage";
+import ShowAndEditTabel from "./Pages/ShowAndEditTabel";
 
 export const Context = createContext();
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<LoginPage />} />
           <Route path="/SignUp" element={<SignUpPage />} />
           <Route path="/DashBoard" element={<DashBoardPage />} />
+          <Route path="/ShowAndEditTabel" element={<ShowAndEditTabel />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </div>
