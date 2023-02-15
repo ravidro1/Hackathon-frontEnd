@@ -1,41 +1,75 @@
-import React, {useState} from "react";
-import DoughnutChart from "../Components/Charts/DoughnutChart";
+import {useEffect, useContext, useState} from "react";
+import {useNavigate} from "react-router-dom";
+
 import "../Style/loginPage.css";
 
-function LoginPage({}) {
-  const [ddata] = useState([
-    {
-      name: "obj1",
-      value: 4,
-      backgroundColor: "rgba(255, 99, 132, 0.2)",
-      borderColor: "rgba(255, 99, 132, 1)",
-    },
-    {
-      name: "obj2",
-      value: 15,
-      backgroundColor: "rgba(54, 162, 235, 0.2)",
-      borderColor: "rgba(54, 162, 235, 1)",
-    },
-    {
-      name: "obj3",
-      value: 8,
-      backgroundColor: "rgba(255, 206, 86, 0.2)",
-      borderColor: "rgba(255, 206, 86, 1)",
-    },
-  ]);
+const Login = () => {
+
+  const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [errorLine, setErrorLine] = useState();
+
+
+  const login = () => {
+    // if (username.length == 0 || password.length == 0) {
+    //   setErrorLine("Both Fields Should Be Filled");
+    // } else {
+
+    // }
+
+    navigate("/DashBoard")
+  };
 
   return (
-    <div className="main-LoginPage">
-      <DoughnutChart
-        label={"label"}
-        arrayOfObject={ddata}
-        middelText={"Hey"}
-        middelTextfontSize={"30px"}
-        width={"400px"}
-        height={"400px"}
-      />
+    <div className="main-loginPage">
+
+      <div className="form-loginPage">
+        <div className="loginWord-LoginPage"> Login </div>
+
+        <div className="inputs-loginPage">
+          <input
+            className="input-loginPage"
+            placeholder="Username"
+            onChange={(e) => {
+              setErrorLine("");
+              setUsername(e.target.value.trim());
+            }}
+            type={"text"}
+          />
+
+          <input
+            className="input-loginPage"
+            placeholder="Password"
+            onChange={(e) => {
+              setErrorLine("");
+
+              setPassword(e.target.value.trim());
+            }}
+            type={"password"}
+          />
+        </div>
+
+        <div className="errorLine-LoginPage">
+          {" "}
+          {errorLine && <span> {errorLine} </span>}
+        </div>
+
+        <div className="loginButton-loginPage" onClick={() => login()}>
+          Login
+        </div>
+
+        <div
+          className="toRegister-LoginPage"
+          onClick={() => navigate("/SignUp")}
+        >
+          Register
+        </div>
+      </div>
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default Login;

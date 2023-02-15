@@ -1,8 +1,73 @@
-import React from "react";
+import React, {useState} from "react";
+import AddTable from "../Components/AddTable";
+import BarChart from "../Components/Charts/BarChart";
+import DoughnutChart from "../Components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
 
 function DashBoardPage(props) {
-  return <div></div>;
+  const [ddata] = useState([
+    {
+      name: "obj1",
+      value: 4,
+      backgroundColor: "rgba(255, 99, 132, 0.2)",
+      borderColor: "rgba(255, 99, 132, 1)",
+    },
+    {
+      name: "obj2",
+      value: 30,
+      backgroundColor: "rgba(54, 162, 235, 0.2)",
+      borderColor: "rgba(54, 162, 235, 1)",
+    },
+    {
+      name: "obj3",
+      value: 8,
+      backgroundColor: "rgba(255, 206, 86, 0.2)",
+      borderColor: "rgba(255, 206, 86, 1)",
+    },
+    {
+      name: "obj4",
+      value: 8,
+      backgroundColor: "rgba(255, 206, 86, 0.2)",
+      borderColor: "rgba(255, 206, 86, 1)",
+    },
+    {
+      name: "obj5",
+      value: 8,
+      backgroundColor: "rgba(255, 206, 86, 0.2)",
+      borderColor: "rgba(255, 206, 86, 1)",
+    },
+    {
+      name: "obj6",
+      value: 8,
+      backgroundColor: "rgba(255, 206, 86, 0.2)",
+      borderColor: "rgba(255, 206, 86, 1)",
+    },
+  ]);
+
+  return (
+    <div className="main-LoginPage">
+      <DoughnutChart
+        label={"label"}
+        arrayOfObject={ddata}
+        middelText={"Hey"}
+        middelTextfontSize={"30px"}
+        width={"400px"}
+        height={"400px"}
+        backgroundColor={"rgba(244,65,12, 0.5)"}
+      />
+      <BarChart
+        label={"label"}
+        arrayOfObject={ddata}
+        headLineText={"Hey"}
+        headLineTextfontSize={"30px"}
+        width={"400px"}
+        height={"400px"}
+        backgroundColor={"rgba(244,65,12, 0.5)"}
+      />
+
+      <AddTable />
+    </div>
+  );
 }
 
 export default DashBoardPage;

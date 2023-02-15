@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from "react";
-import {Doughnut} from "react-chartjs-2";
-import {Chart as ChartJS, plugins} from "chart.js/auto";
+import {Bar} from "react-chartjs-2";
+import {Chart as ChartJS, plugins, scales} from "chart.js/auto";
 
-function DoughnutChart({
+function BarChart({
   label,
   arrayOfObject,
-  middelText,
-  middelTextfontSize,
+  headLineText,
+  headLineTextfontSize,
   width,
   height,
   backgroundColor
@@ -43,12 +43,19 @@ function DoughnutChart({
   }, [arrayOfObject]);
 
   const [op] = useState({
+    // aspectRatio: 1,
     layout: {
-      padding: 20,
+      padding: {
+        top: 30,
+      },
     },
     plugins: {
+      chartArea: {
+        backgroundColor: "rgba(251, 85, 85, 0.4)",
+      },
+
       legend: {
-        display: false,
+        // display: false,
       },
     },
   });
@@ -81,23 +88,28 @@ function DoughnutChart({
 
       ctx.save();
 
-      if (_active.length) {
-        const x = _active[0].element.x;
-        const y = _active[0].element.y;
+      const x = width / 2;
+      // const x = 0;
+      const y = height * 0.1;
 
-        ctx.font = `bold ${middelTextfontSize} sans-serif`;
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        ctx.fillText(middelText, x, y);
-      }
+      ctx.font = `bold ${headLineTextfontSize} sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(headLineText, x, y);
     },
   });
 
   return (
     <div style={{width, height}}>
-      {data && <Doughnut data={data} options={op} plugins={[doughnutText,customCanvasBackgroundColor]} />}
+      {data && (
+        <Bar
+          data={data}
+          options={op}
+          plugins={[doughnutText, customCanvasBackgroundColor]}
+        />
+      )}
     </div>
   );
 }
 
-export default DoughnutChart;
+export default BarChart;
