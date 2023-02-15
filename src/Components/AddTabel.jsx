@@ -1,31 +1,50 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { Context } from "../App";
+import React, {useContext, useEffect, useRef, useState} from "react";
+import {Context} from "../App";
 import DefineDataTypes from "./DefineDataTypes";
 
 import axios from "axios";
 
 function AddTabel(props) {
-  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user } = useContext(Context);
-
-
+  const {
+    dataTypes,
+    typeOfFieldsObj,
+    setTypeOfFieldsObj,
+    FileTable,
+    setFileTable,
+    user,
+  } = useContext(Context);
 
   const fileInputRef = useRef();
 
   const [tempFile, setTempFile] = useState();
   const [Tabel, setTabel] = useState();
-  const [excelName, setExcelName] = useState("")
-
-
+  const [excelName, setExcelName] = useState("");
 
   const uploadFileToDb = () => {
-    const fileData = new FormData()
-    fileData.append("uploadFile", tempFile)
-    console.log(tempFile);
-    console.log(fileData);
-    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/HandleFileUpload`, fileData)
-      .then(res => {
-        setTabel(res.data.data)
-      })
+    const fileData = new FormData();
+    fileData.append("uploadFile", tempFile);
+
+    if (tempFile) {
+      axios
+        .post(
+          `${process.env.REACT_APP_EXPRESS_PORT}/HandleFileUpload`,
+          fileData
+        )
+        .then((res) => {
+          console.log(res.data);
+
+          const tempObj = {};
+          res.data.keys?.forEach((key) => {
+            tempObj[key] = "";
+          });
+          setTypeOfFieldsObj(tempObj);
+
+          setTabel(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
 
     setTempFile("");
     fileInputRef.current.value = [];
@@ -49,11 +68,21 @@ function AddTabel(props) {
   function setSchemaMongoose() {
     console.log(user);
     console.log(typeOfFieldsObj);
-    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: user._id })
-      .then(res => { setFileTable(res.data.excelTable) })
-      .catch(err => { console.log(err); })
+    axios
+      .post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, {
+        dataType: typeOfFieldsObj,
+        tableData: Tabel,
+        name: excelName,
+        user_id: user._id,
+      })
+      .then((res) => {
+        console.log(res.data.excelTable);
+        setFileTable(res.data.excelTable);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
-  console.log(user);
 
   return (
     <div>
@@ -66,15 +95,17 @@ function AddTabel(props) {
       />
       <button onClick={uploadFileToDb}> Add Tabel </button>
       {Tabel && <DefineDataTypes tabelArray={Tabel} />}
-      {isAllTheFieldsWithDataType &&
+      {isAllTheFieldsWithDataType && (
         <>
           <h3>Enter Excel Name</h3>
           <input type="text" onChange={(e) => setExcelName(e.target.value)} />
-        </>}
-      {excelName.length > 3 && <button onClick={setSchemaMongoose}> submit </button>}
+        </>
+      )}
+      {excelName.length > 3 && (
+        <button onClick={setSchemaMongoose}> submit </button>
+      )}
     </div>
   );
 }
-
 
 export default AddTabel;
