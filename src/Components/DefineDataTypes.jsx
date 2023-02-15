@@ -11,9 +11,14 @@ function DefineDataTypes({ tabelArray }) {
   useEffect(() => {
     setTypeOfFieldsObj(() => {
       const tempObj = {};
-      tabelArray && tabelArray[0]?.forEach((key) => {
+
+      tabelArray && Object.keys(tabelArray[0])?.forEach((key, index) => {
+
         tempObj[key] = "";
-      });
+
+      })
+
+
       return tempObj;
     });
   }, []);
@@ -39,15 +44,15 @@ function DefineDataTypes({ tabelArray }) {
   return (
     <div>
       <div>
-        {tabelArray && tabelArray[0]?.map((item, index) => {
+        {tabelArray && Object.keys(tabelArray[0])?.map((key, index) => {
           return (
             <div key={index}>
               <input
                 disabled
-                defaultValue={item.toString().trim()}
+                defaultValue={[key].toString().trim()}
               />
               <select
-                onChange={(e) => changeTypeOfFieldsObj(item, e.target.value)}
+                onChange={(e) => changeTypeOfFieldsObj(key, e.target.value)}
                 name=""
                 id="types"
               >

@@ -8,11 +8,12 @@ function DataContext(props) {
   const [dataTypes] = useState(["number", "text", "Date", "Two Values"]);
 
   const [typeOfFieldsObj, setTypeOfFieldsObj] = useState();
-
+  const [user, setUser] = useState("")
 
   const logout = () => {
     sessionStorage.removeItem("token");
     sessionStorage.removeItem("id");
+    setUser("")
     navigate("/");
   };
   const [FileTable, setFileTable] = useState([])
@@ -22,7 +23,7 @@ function DataContext(props) {
     typeOfFieldsObj,
     setTypeOfFieldsObj,
     logout,
-
+    user, setUser,
     setFileTable,
     FileTable
   };
