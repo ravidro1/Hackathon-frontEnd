@@ -140,6 +140,9 @@
 
 .input-wrapper label {
     font-weight: 500;
+    margin-right: auto;
+    padding-left: .2rem;
+    font-size: .8rem;
 }
 
 .add-row button {
