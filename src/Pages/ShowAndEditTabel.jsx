@@ -1,9 +1,9 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
 import AddTabel from "../components/AddTabel";
 import ExcelTable from "../components/Charts/ExcelTable";
 import AddToTable from "./AddToTable";
-import NavBar from "../Components/NavBar";
+import NavBar from "../components/NavBar";
 
 function ShowAndEditTabel(props) {
   return (
