@@ -1,41 +1,45 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import AddTable from "../components/DefineDataTypes";
 import BarChart from "../components/Charts/BarChart";
 import DoughnutChart from "../components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
 import NavBar from "../components/NavBar";
-import { Context } from "../App";
+import {Context} from "../App";
+import ChooseFilterChart from "../components/Charts/ChooseFilterChart";
 
 function DashBoardPage(props) {
-
-  const { FileTable, setFileTable, userExcelCollection, setUserExcelCollection } = useContext(Context)
+  const {
+    FileTable,
+    setFileTable,
+    userExcelCollection,
+    setUserExcelCollection,
+    currentExcel,
+  } = useContext(Context);
   function setArr(obj) {
-    console.log(Object.entries(obj))
+    console.log(Object.entries(obj));
     let arr = [];
-    Object.entries(obj).forEach(e => {
-      arr.push({ name: e[0], value: e[1] })
-    })
+    Object.entries(obj).forEach((e) => {
+      arr.push({name: e[0], value: e[1]});
+    });
     console.log(arr);
-    return arr
+    return arr;
   }
   function calculateSum(array, property) {
     let arr = {};
     console.log(FileTable);
-    array.forEach(ele => {
-      arr[ele[property]] = (arr[ele[property]] || 0) + 1
+    array.forEach((ele) => {
+      arr[ele[property]] = (arr[ele[property]] || 0) + 1;
       // arr["value"] = (arr["value"] || 0) + 1
     });
     console.log(arr);
-    return arr
+    return arr;
   }
 
-
-
-  function theCountToArr(array, property) {
-    // const objSum = calculateSum(array, property)
-    const count = setArr(calculateSum(array, property))
-    console.log(count);
-  }
+  // function theCountToArr(array, property) {
+  //   // const objSum = calculateSum(array, property)
+  //   const count = setArr(calculateSum(array, property));
+  //   console.log(count);
+  // }
 
   const [ddata] = useState([
     {
@@ -78,14 +82,23 @@ function DashBoardPage(props) {
 
   return (
     <div className="main-DashBoard">
-      {console.log(userExcelCollection)}
+      <NavBar />
+
+      {/* {console.log(userExcelCollection)} */}
       <div>
         {userExcelCollection?.map((excel, index) => {
-          return <button key={index} onClick={() => { setFileTable(excel.excel_structure) }}>{excel.name}</button>
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                setFileTable(excel.excel_structure);
+              }}
+            >
+              {excel.name}
+            </button>
+          );
         })}
       </div>
-      <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button>
-      <NavBar />
 
       {/* <DoughnutChart
         label={"label"}
@@ -96,7 +109,7 @@ function DashBoardPage(props) {
         height={"400px"}
         backgroundColor={"rgba(244,65,12, 0.5)"}
       /> */}
-      <BarChart
+      {/* <BarChart
         label={"label"}
         arrayOfObject={ddata}
         headLineText={"Hey"}
@@ -104,21 +117,9 @@ function DashBoardPage(props) {
         width={"400px"}
         height={"400px"}
         backgroundColor={"rgba(244,65,12, 0.5)"}
-      />
+      /> */}
 
-      {/* <div>
-        X -Axis
-        <select>
-          <option></option>
-        </select>
-      </div>
-
-      <div>
-        filters
-        <select>
-          <option></option>
-        </select>
-      </div> */}
+      <ChooseFilterChart />
     </div>
   );
 }

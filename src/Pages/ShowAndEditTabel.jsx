@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 
 import AddTabel from "../components/AddTabel";
-import ExcelTable from "../components/Charts/ExcelTable";
+import ExcelTable from "../components/ExcelTable";
 import AddToTable from "./AddToTable";
 import NavBar from "../components/NavBar";
 
