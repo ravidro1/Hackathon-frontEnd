@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Context } from "../../App";
 
 function ExcelTable() {
-  const { FileTable } = useContext(Context);
+  const { FileTable, excelDataType } = useContext(Context);
 
   return (
     <div>
@@ -11,8 +11,8 @@ function ExcelTable() {
       <table>
         <thead>
           <tr>
-            {FileTable[0] && Object.keys(FileTable[0])?.map((columnName, index) => {
-              return <th key={index}>{columnName}</th>
+            {FileTable[0] && Object.keys(excelDataType)?.map((key, index) => {
+              return <th key={index}>{key}</th>
               // console.log(Object.keys(FileTable[0]))
 
             })}
@@ -22,8 +22,8 @@ function ExcelTable() {
           {
             FileTable && FileTable?.map((fullObj, index) => {
               return (<tr key={index}>
-                {Object.values(fullObj)?.map((columnData, i) => {
-                  return <td key={i} >{columnData}</td>
+                {Object.keys(excelDataType)?.map((key, i) => {
+                  return <td key={i} >{fullObj[key]}</td>
                   // console.log(columnData);
                 })}
               </tr>)
@@ -31,6 +31,7 @@ function ExcelTable() {
           }
         </tbody>
       </table>
+
     </div>
   )
 }

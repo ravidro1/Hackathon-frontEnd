@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AddTable from "../components/DefineDataTypes";
 import BarChart from "../components/Charts/BarChart";
 import DoughnutChart from "../components/Charts/DoughnutChart";
@@ -8,7 +8,7 @@ import { Context } from "../App";
 
 function DashBoardPage(props) {
 
-  const { FileTable } = useContext(Context)
+  const { FileTable, setFileTable, userExcelCollection, setUserExcelCollection } = useContext(Context)
   function setArr(obj) {
     console.log(Object.entries(obj))
     let arr = [];
@@ -28,6 +28,9 @@ function DashBoardPage(props) {
     console.log(arr);
     return arr
   }
+
+
+
   function theCountToArr(array, property) {
     // const objSum = calculateSum(array, property)
     const count = setArr(calculateSum(array, property))
@@ -75,6 +78,12 @@ function DashBoardPage(props) {
 
   return (
     <div className="main-DashBoard">
+      {console.log(userExcelCollection)}
+      <div>
+        {userExcelCollection?.map((excel, index) => {
+          return <button key={index} onClick={() => { setFileTable(excel.excel_structure) }}>{excel.name}</button>
+        })}
+      </div>
       <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button>
       <NavBar />
 
