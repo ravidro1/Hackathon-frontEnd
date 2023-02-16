@@ -120,7 +120,7 @@ function DashBoardPage(props) {
         backgroundColor={"rgba(244,65,12, 0.5)"}
       /> */}
 
-      {/* <ChooseFilterChart /> */}
+      <ChooseFilterChart />
     </div >
   );
 }
