@@ -5,7 +5,7 @@ import { Context } from "../App";
 import AddToTable from "../Pages/AddToTable";
 
 function ExcelTable({ setShowExcle }) {
-  const { FileTable, excelDataType, currentExcel, user, userExcelCollection, setUserExcelCollection } = useContext(Context);
+  const { FileTable, excelDataType, currentExcel, user, userExcelCollection, setUserExcelCollection, setCurrentExcel } = useContext(Context);
 
   const navigate = useNavigate()
 
@@ -20,31 +20,65 @@ function ExcelTable({ setShowExcle }) {
       .catch((err) => console.log(err))
   }
   const [isAddShow, setIsAddShow] = useState(false)
+  const [editShow, setEditAddShow] = useState(false)
+  const [inputEdit, setInputEdit] = useState("")
+  const [editValues, setEditValues] = useState({})
+  function EditRowTable() {
+    // const type = excelDataType[editValues.key]
+    // console.log(editValues);
+    // const [inputEdit, setInputEdit] = useState("")
+    // console.log(currentExcel.excel_structure[editValues.row][editValues.key]);
+    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/EditExcel`, { editValues, excel_id: currentExcel._id, inputValue: inputEdit })
+      .then((res) => {
+        console.log(currentExcel);
+        const temp = currentExcel.excel_structure
+        // console.log(editValues);
+        temp[editValues.row][editValues.key] = inputEdit
+        setCurrentExcel(res.data.excel)
+        // console.log(res.data);
 
+      }
+      )
+      .catch((err) => console.log(err))
+
+  }
+  function cheakDataType(key) {
+    const type = excelDataType[key]
+    return type
+  }
   return (
     <div>
       <button onClick={() => setShowExcle(false)}> back Add Excel</button>
-      {console.log(FileTable)}
+      {/* {console.log(FileTable)} */}
       {currentExcel?._id && <button onClick={deleteExcel}>Delete Current Excel</button>}
       {isAddShow && <AddToTable />}
       {!isAddShow ? <button onClick={() => setIsAddShow(true)}>++</button> : <button onClick={() => setIsAddShow(false)}>Cancle</button>}
+
+      {editShow &&
+        <>
+          <input type={editValues.type} onChange={(e) => setInputEdit(e.target.value)} />
+          <button onClick={() => EditRowTable()}>Edit</button>
+
+        </>
+      }
       <table>
         <thead>
           <tr>
             {FileTable && Object.keys(excelDataType)?.map((key, index) => {
               return <th key={index}>{key}</th>
-              // console.log(Object.keys(FileTable[0]))
-
             })}
           </tr>
         </thead>
         <tbody>
-          {/* {FileTable && <>hELLO</>} */}
+          {/* {console.log(editValues)} */}
           {
-            FileTable && FileTable?.map((fullObj, index) => {
+            currentExcel.excel_structure && currentExcel.excel_structure?.map((fullObj, index) => {
               return (<tr key={index}>
                 {Object.keys(excelDataType)?.map((key, i) => {
-                  return <td key={i} >{fullObj[key]}</td>
+                  return <td onDoubleClick={() => {
+                    setEditAddShow(true)
+                    setEditValues({ row: index, key: key, type: cheakDataType(key) })
+                  }} key={i} >{fullObj[key]}</td>
                   // console.log(columnData);
                 })}
               </tr>)
@@ -52,7 +86,7 @@ function ExcelTable({ setShowExcle }) {
           }
         </tbody>
       </table>
-      {console.log(currentExcel)}
+      {/* {console.log(currentExcel)} */}
 
     </div>
   )

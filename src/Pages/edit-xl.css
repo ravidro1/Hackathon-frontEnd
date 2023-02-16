@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    /* padding: 0; */
+}
+
 .uploadfile-wrapper {}
 
 .uploadfile {
@@ -6,15 +11,87 @@
     justify-content: center;
     align-items: center;
     padding: 3vw;
+    gap: 2vw;
 }
 
 .uploadfile-form {
-    width: 80%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+    padding: .5rem;
+    padding-inline: 2rem;
+    border-radius: 10px;
+}
+
+.uploadfile-form button {
+    border: 1px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: blueviolet;
+    color: azure;
+    padding: .5rem;
+}
+
+.uploadfile-form input {
+    color: white;
+}
+
+.excle-name {
+    width: 50%;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.excle-name input {
+    width: 100%;
+    padding: .5rem;
+}
+
+.submit-btn {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn button {
+    padding: .5rem;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+    background-color: blueviolet;
+    color: white;
+}
+
+.select-wrapper {
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.uploadfile-form input #file-upload-button {
+.select-btn {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3vw;
+}
+
+.single-select-btn input {
     padding: .5rem;
+    /* width: fit-content; */
+}
+
+.single-select-btn select {
+
+    padding: .5rem;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }
