@@ -31,6 +31,7 @@ function ExcelTable() {
           }
         </tbody>
       </table>
+
     </div>
   )
 }
