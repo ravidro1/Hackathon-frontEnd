@@ -1,12 +1,12 @@
-import React, {useState} from "react";
-import {useEffect} from "react";
-import {useContext} from "react";
-import {Context} from "../App";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useContext } from "react";
+import { Context } from "../App";
 import DataContext from "../DataContext";
 import AddTabel from "./AddTabel";
 
-function DefineDataTypes({tabelArray}) {
-  const {dataTypes, typeOfFieldsObj, setTypeOfFieldsObj} = useContext(Context);
+function DefineDataTypes({ tabelArray }) {
+  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj } = useContext(Context);
 
   useEffect(() => {
     if (typeOfFieldsObj) {
@@ -14,16 +14,16 @@ function DefineDataTypes({tabelArray}) {
   }, [typeOfFieldsObj]);
 
   const changeTypeOfFieldsObj = (dataKey, newType) => {
-    const newTypeOfFieldsObj = {...typeOfFieldsObj, [dataKey]: newType};
+    const newTypeOfFieldsObj = { ...typeOfFieldsObj, [dataKey]: newType };
     setTypeOfFieldsObj(newTypeOfFieldsObj);
   };
 
   return (
-    <div>
-      <div>
+    <div className="select-wrapper">
+      <div className="select-btn">
         {Object.keys(typeOfFieldsObj)?.map((key, index) => {
           return (
-            <div key={index}>
+            <div className="single-select-btn" key={index}>
               <input disabled defaultValue={[key].toString().trim()} />
               <select
                 onChange={(e) => changeTypeOfFieldsObj(key, e.target.value)}

@@ -87,13 +87,13 @@ function AddTabel({ setShowExcle }) {
           <button onClick={uploadFileToDb}> Add Tabel </button>
         </div>
         {isAllTheFieldsWithDataType && (
-          <div>
+          <div className="excle-name">
             <h3>Enter Excel Name</h3>
             <input type="text" onChange={(e) => setExcelName(e.target.value)} />
           </div>
         )}
         {excelName.length > 3 && (
-          <div>
+          <div className="submit-btn">
 
             <button onClick={setSchemaMongoose}> submit </button>
           </div>
