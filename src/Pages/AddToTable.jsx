@@ -37,7 +37,7 @@ function AddToTable() {
             .catch(err => { console.log(err); })
     }
     return (
-        <div>
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
             {Object.keys(excelDataType).map((key, index) => {
                 return (<div key={index}>
                     <input onChange={((e) => addValueToRow(key, e.target.value))} placeholder={key} />

@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+}
+
+.nav-bar-wrapper {
+    position: fixed;
+    padding: .5rem;
+    padding-inline: 1rem;
+    width: 100vw;
+    top: 0;
+    background-color: blueviolet;
+
+}
+
+.nav-bar {
+    display: flex;
+    width: 100%;
+    gap: .5rem;
+
+    /* padding: 1rem; */
+}
+
+.nav-bar>*:last-child {
+    margin-left: auto;
+}
+
+.nav-bar button {
+    height: 100%;
+    padding: .5rem;
+    background-color: rgb(99, 26, 167);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 200ms ease-in-out;
+}
+
+.nav-bar button:hover {
+    background-color: rgb(143, 81, 201);
+}

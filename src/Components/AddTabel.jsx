@@ -4,7 +4,7 @@ import DefineDataTypes from "./DefineDataTypes";
 
 import axios from "axios";
 
-function AddTabel(props) {
+function AddTabel({ setShowExcle }) {
   const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user, setExcelDataType, setCurrentExcel } = useContext(Context);
 
 
@@ -69,30 +69,39 @@ function AddTabel(props) {
         setFileTable(res.data.excelTable)
         setExcelDataType(res.data.excelDataType)
         setCurrentExcel(res.data.excel)
+        setShowExcle(true)
       })
       .catch(err => { console.log(err); })
   }
 
   return (
-    <div>
-      <input
-        ref={fileInputRef}
-        onChange={(e) => {
-          setTempFile(e.target.files[0]);
-        }}
-        type={"file"}
-      />
-      <button onClick={uploadFileToDb}> Add Tabel </button>
-      {Tabel && <DefineDataTypes tabelArray={Tabel} />}
-      {isAllTheFieldsWithDataType && (
-        <>
-          <h3>Enter Excel Name</h3>
-          <input type="text" onChange={(e) => setExcelName(e.target.value)} />
-        </>
-      )}
-      {excelName.length > 3 && (
-        <button onClick={setSchemaMongoose}> submit </button>
-      )}
+    <div className="uploadfile-wrapper">
+      <div className="uploadfile">
+
+        <div className="uploadfile-form">
+          <input
+            ref={fileInputRef}
+            onChange={(e) => {
+              setTempFile(e.target.files[0]);
+            }}
+            type={"file"}
+          />
+          <button onClick={uploadFileToDb}> Add Tabel </button>
+        </div>
+        {isAllTheFieldsWithDataType && (
+          <div>
+            <h3>Enter Excel Name</h3>
+            <input type="text" onChange={(e) => setExcelName(e.target.value)} />
+          </div>
+        )}
+        {excelName.length > 3 && (
+          <div>
+
+            <button onClick={setSchemaMongoose}> submit </button>
+          </div>
+        )}
+        {Tabel && <DefineDataTypes tabelArray={Tabel} />}
+      </div>
     </div>
   );
 }
