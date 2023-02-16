@@ -1,0 +1,20 @@
+.uploadfile-wrapper {}
+
+.uploadfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3vw;
+}
+
+.uploadfile-form {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.uploadfile-form input #file-upload-button {
+    padding: .5rem;
+}

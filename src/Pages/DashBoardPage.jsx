@@ -1,26 +1,21 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AddTable from "../components/DefineDataTypes";
 import BarChart from "../components/Charts/BarChart";
 import DoughnutChart from "../components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
 import NavBar from "../components/NavBar";
-import {Context} from "../App";
 import ChooseFilterChart from "../components/Charts/ChooseFilterChart";
+import { Context } from "../App";
 
 function DashBoardPage(props) {
-  const {
-    FileTable,
-    setFileTable,
-    userExcelCollection,
-    setUserExcelCollection,
-    currentExcel,
-  } = useContext(Context);
+
+  const { FileTable, setFileTable, userExcelCollection, setUserExcelCollection, setCurrentExcel, currentExcel, setExcelDataType } = useContext(Context)
   function setArr(obj) {
     console.log(Object.entries(obj));
     let arr = [];
-    Object.entries(obj).forEach((e) => {
-      arr.push({name: e[0], value: e[1]});
-    });
+    // Object.entries(obj).forEach((e) => {
+    //   arr.push({ name: e[0], value: e[1] });
+    // });
     console.log(arr);
     return arr;
   }
@@ -91,7 +86,11 @@ function DashBoardPage(props) {
             <button
               key={index}
               onClick={() => {
+
                 setFileTable(excel.excel_structure);
+
+                setExcelDataType(excel.excel_dataTypes)
+                setCurrentExcel(excel)
               }}
             >
               {excel.name}
@@ -99,6 +98,8 @@ function DashBoardPage(props) {
           );
         })}
       </div>
+      {/* <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button> */}
+      <NavBar />
 
       {/* <DoughnutChart
         label={"label"}
@@ -119,8 +120,8 @@ function DashBoardPage(props) {
         backgroundColor={"rgba(244,65,12, 0.5)"}
       /> */}
 
-      <ChooseFilterChart />
-    </div>
+      {/* <ChooseFilterChart /> */}
+    </div >
   );
 }
 
