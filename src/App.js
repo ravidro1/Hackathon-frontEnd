@@ -8,6 +8,7 @@ import DataContext from "./DataContext";
 import ErrorPage from "./Pages/ErrorPage";
 import ShowAndEditTabel from "./Pages/ShowAndEditTabel";
 import NavBar from "./components/NavBar";
+import Both from "./Both";
 
 export const Context = createContext();
 
@@ -16,7 +17,10 @@ function App() {
   return (
     <Context.Provider value={contextValue}>
       <div className="App">
-        <NavBar />
+        {/* <Both /> */}
+
+        {contextValue.currentUser && <NavBar />}
+
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route path="/SignUp" element={<SignUpPage />} />

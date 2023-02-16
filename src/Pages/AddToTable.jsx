@@ -37,15 +37,19 @@ function AddToTable() {
             .catch(err => { console.log(err); })
     }
     return (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {Object.keys(excelDataType).map((key, index) => {
-                return (<div key={index}>
-                    <input onChange={((e) => addValueToRow(key, e.target.value))} placeholder={key} />
+        <div className='add-row-wrapper'>
+            <div className='add-row'>
 
-                </div>)
-            })}
-            {isFilled && <button onClick={addRowToTable}>Add Row</button>}
-            {/* {typeOfFieldsObj.)} */}
+                {Object.keys(excelDataType).map((key, index) => {
+                    return (<div className='input-wrapper' key={index}>
+                        <label htmlFor={key}>{key}</label>
+                        <input id='key' onChange={((e) => addValueToRow(key, e.target.value))} placeholder={key} />
+
+                    </div>)
+                })}
+                {isFilled && <button onClick={addRowToTable}>Add Row</button>}
+                {/* {typeOfFieldsObj.)} */}
+            </div>
         </div>
     )
 }

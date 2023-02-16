@@ -1,13 +1,13 @@
-import {useEffect, useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { useEffect, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import "../Style/loginPage.css";
-import {Context} from "../App";
+import "./loginSign.css";
+import { Context } from "../App";
 
 const Login = () => {
   const navigate = useNavigate();
-  const {currentUser, setCurrentUser} = useContext(Context);
+  const { currentUser, setCurrentUser } = useContext(Context);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,31 +41,39 @@ const Login = () => {
   };
 
   return (
-    <div className="main-loginPage">
-      <div className="form-loginPage">
-        <div className="loginWord-LoginPage"> Login </div>
+    <div className="main-signUpPage">
+      <div className="main-login-wrapper">
+        <div className="signUpWord-signUpPage">
+          <h2>
+            Please Login To Your Account </h2> </div>
 
-        <div className="inputs-loginPage">
-          <input
-            className="input-loginPage"
-            placeholder="Username"
-            onChange={(e) => {
-              setErrorLine("");
-              setUsername(e.target.value.trim());
-            }}
-            type={"text"}
-          />
 
-          <input
-            className="input-loginPage"
-            placeholder="Password"
-            onChange={(e) => {
-              setErrorLine("");
 
-              setPassword(e.target.value.trim());
-            }}
-            type={"password"}
-          />
+        <div className="inputs-signUpPage">
+          <div>
+
+            <input
+              className="input-signUpPage"
+              placeholder="Username"
+              onChange={(e) => {
+                setErrorLine("");
+                setUsername(e.target.value.trim());
+              }}
+              type={"text"}
+            />
+          </div>
+          <div>
+            <input
+              className="input-signUpPage"
+              placeholder="Password"
+              onChange={(e) => {
+                setErrorLine("");
+
+                setPassword(e.target.value.trim());
+              }}
+              type={"password"}
+            />
+          </div>
         </div>
 
         <div className="errorLine-LoginPage">
@@ -73,15 +81,15 @@ const Login = () => {
           {errorLine && <span> {errorLine} </span>}
         </div>
 
-        <div className="loginButton-loginPage" onClick={() => login()}>
+        <div className="loginButton-signUpPage" onClick={() => login()}>
           Login
         </div>
 
         <div
-          className="toRegister-LoginPage"
+          className="toRegister-SignPage"
           onClick={() => navigate("/SignUp")}
         >
-          Register
+          <h1>To Register</h1>
         </div>
       </div>
     </div>

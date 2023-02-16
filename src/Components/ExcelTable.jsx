@@ -47,12 +47,15 @@ function ExcelTable({ setShowExcle }) {
     return type
   }
   return (
-    <div>
-      <button onClick={() => setShowExcle(false)}> back Add Excel</button>
-      {/* {console.log(FileTable)} */}
-      {currentExcel?._id && <button onClick={deleteExcel}>Delete Current Excel</button>}
+    <div >
+      <div className="btn-wrapper-table">
+
+        <button onClick={() => setShowExcle(false)}> back Add Excel</button>
+        {/* {console.log(FileTable)} */}
+        {currentExcel?._id && <button onClick={deleteExcel}>Delete Current Excel</button>}
+        {!isAddShow ? <button onClick={() => setIsAddShow(true)}>++</button> : <button onClick={() => setIsAddShow(false)}>Cancle CreateRow</button>}
+      </div>
       {isAddShow && <AddToTable />}
-      {!isAddShow ? <button onClick={() => setIsAddShow(true)}>++</button> : <button onClick={() => setIsAddShow(false)}>Cancle</button>}
 
       {editShow &&
         <>
@@ -61,31 +64,38 @@ function ExcelTable({ setShowExcle }) {
 
         </>
       }
-      <table>
-        <thead>
-          <tr>
-            {FileTable && Object.keys(excelDataType)?.map((key, index) => {
-              return <th key={index}>{key}</th>
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {/* {console.log(editValues)} */}
-          {
-            currentExcel.excel_structure && currentExcel.excel_structure?.map((fullObj, index) => {
-              return (<tr key={index}>
-                {Object.keys(excelDataType)?.map((key, i) => {
-                  return <td onDoubleClick={() => {
-                    setEditAddShow(true)
-                    setEditValues({ row: index, key: key, type: cheakDataType(key) })
-                  }} key={i} >{fullObj[key]}</td>
-                  // console.log(columnData);
+      <div className="table">
+
+        <div className="table-wrapper">
+
+          <table cellpadding="10" >
+            <thead>
+              <tr>
+                {FileTable && Object.keys(excelDataType)?.map((key, index) => {
+                  return <th key={index}>{key}</th>
                 })}
-              </tr>)
-            })
-          }
-        </tbody>
-      </table>
+              </tr>
+            </thead>
+            <tbody>
+              {/* {console.log(editValues)} */}
+              {
+                currentExcel.excel_structure && currentExcel.excel_structure?.map((fullObj, index) => {
+                  return (<tr key={index}>
+                    {Object.keys(excelDataType)?.map((key, i) => {
+                      return <td onDoubleClick={() => {
+                        setEditAddShow(true)
+                        setEditValues({ row: index, key: key, type: cheakDataType(key) })
+                      }} key={i} >{fullObj[key]}</td>
+                      // console.log(columnData);
+                    })}
+                  </tr>)
+                })
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+
       {/* {console.log(currentExcel)} */}
 
     </div>
