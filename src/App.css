@@ -1,5 +1,7 @@
 .App {
   padding-top: 3rem;
+  background-color: #390037;
+  min-height: 100vh;
 }
 
 .App-logo {
