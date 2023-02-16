@@ -5,7 +5,7 @@ import DefineDataTypes from "./DefineDataTypes";
 import axios from "axios";
 
 function AddTabel({ setShowExcle }) {
-  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, user, setExcelDataType, setCurrentExcel } = useContext(Context);
+  const { dataTypes, typeOfFieldsObj, setTypeOfFieldsObj, FileTable, setFileTable, currentUser, setExcelDataType, setCurrentExcel } = useContext(Context);
 
 
 
@@ -61,9 +61,7 @@ function AddTabel({ setShowExcle }) {
   }, [typeOfFieldsObj]);
 
   function setSchemaMongoose() {
-    console.log(user);
-    console.log(typeOfFieldsObj);
-    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: user._id })
+    axios.post(`${process.env.REACT_APP_EXPRESS_PORT}/UploadTableToDataBase`, { dataType: typeOfFieldsObj, tableData: Tabel, name: excelName, user_id: currentUser._id })
       .then(res => {
         console.log(res.data);
         setFileTable(res.data.excelTable)

@@ -5,6 +5,7 @@ import DoughnutChart from "../components/Charts/DoughnutChart";
 import "../Style/dashBoardPage.css";
 import NavBar from "../components/NavBar";
 import ChooseFilterChart from "../components/Charts/ChooseFilterChart";
+import { Context } from "../App";
 
 function DashBoardPage(props) {
 
@@ -97,7 +98,7 @@ function DashBoardPage(props) {
           );
         })}
       </div>
-      <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button>
+      {/* <button onClick={() => { theCountToArr(FileTable, "שם") }}>aaaaaa</button> */}
       <NavBar />
 
       {/* <DoughnutChart
