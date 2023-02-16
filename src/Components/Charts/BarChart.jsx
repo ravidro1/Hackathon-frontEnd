@@ -3,44 +3,15 @@ import {Bar} from "react-chartjs-2";
 import {Chart as ChartJS, plugins, scales} from "chart.js/auto";
 
 function BarChart({
-  label,
-  arrayOfObject,
+  data,
   headLineText,
   headLineTextfontSize,
   width,
   height,
   backgroundColor
 }) {
-  const [data, setData] = useState();
 
-  useEffect(() => {
-    const tempValue = {
-      labels: [],
-      datasets: [
-        {
-          label: label,
-          data: [],
-          backgroundColor: [],
-          borderColor: [],
-          borderWidth: 1,
-          cutout: "65%",
-          // hoverOffset: 30,
-          hoverOffset: 0,
-        },
-      ],
-    };
 
-    arrayOfObject.forEach((item) => {
-      tempValue.labels.push(item.name);
-      tempValue.datasets[0].backgroundColor.push(item.backgroundColor);
-      tempValue.datasets[0].borderColor.push(item.borderColor);
-      tempValue.datasets[0].data.push(item.value);
-    });
-
-    // console.log(tempValue);
-
-    setData(tempValue);
-  }, [arrayOfObject]);
 
   const [op] = useState({
     // aspectRatio: 1,
