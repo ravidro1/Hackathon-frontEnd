@@ -1,10 +1,10 @@
 import axios from "axios";
-import React, {useContext, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {Context} from "../App";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
 import AddToTable from "../Pages/AddToTable";
 
-function ExcelTable({setShowExcle}) {
+function ExcelTable({ setShowExcle }) {
   const {
     FileTable,
     excelDataType,
@@ -78,15 +78,24 @@ function ExcelTable({setShowExcle}) {
       </div>
       {isAddShow && <AddToTable />}
 
-      {editShow && (
-        <>
-          <input
-            type={editValues.type}
-            onChange={(e) => setInputEdit(e.target.value)}
-          />
-          <button onClick={() => EditRowTable()}>Edit</button>
-        </>
-      )}
+      {editShow &&
+        <div className="edit-input">
+          <div className="edit-input-wrapper">
+
+            <div className="edit-head">
+              <span>Edit Here</span>
+              <button onClick={() => setEditAddShow(false)}>Cancle Edit</button>
+            </div>
+
+            <div>
+              <input type={editValues.type} onChange={(e) => setInputEdit(e.target.value)} />
+              <button onClick={() => EditRowTable()}>Edit</button>
+
+            </div>
+          </div>
+
+        </div>
+      }
       <div className="table">
         <div className="table-wrapper">
           <table cellpadding="10">
